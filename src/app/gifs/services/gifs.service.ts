@@ -25,10 +25,11 @@ export class GifsService {
 
     this.organizeHistory(newTag);
 
-    fetch(
+    const resp = await fetch(
       'https://api.giphy.com/v1/gifs/search?api_key=HbfLG24MZdnzj5qmhMGU750n89wk4YOK&q=Dragon ball&limit=10'
-    )
-      .then((resp) => resp.json())
-      .then((data) => console.log(data));
+    );
+    const data = await resp.json();
+
+    console.log(data);
   }
 }
