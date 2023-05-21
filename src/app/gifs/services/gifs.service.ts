@@ -10,7 +10,9 @@ export class GifsService {
 
   public gifList: Gif[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.readLocalStorage();
+  }
 
   get tagHistory() {
     return [...this._tagsHistory];
@@ -30,6 +32,14 @@ export class GifsService {
 
   private saveLocalStorage(): void {
     localStorage.setItem('tagsHistory', JSON.stringify(this._tagsHistory));
+  }
+
+  private readLocalStorage(): void {
+    if (!localStorage.getItem('tagsHistory')) return;
+    this._tagsHistory = JSON.parse(localStorage.getItem('tagsHistory')!);
+
+    if (this._tagsHistory.length === 0) return;
+    this.searchTag(this._tagsHistory[0]);
   }
 
   searchTag(newTag: string): void {
