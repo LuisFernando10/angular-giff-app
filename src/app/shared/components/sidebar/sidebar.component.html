@@ -5,6 +5,7 @@
     <button
       *ngFor="let tag of gifsData"
       class="list-group-item list-group-item-action"
+      (click)="onLoadTagGifs(tag)"
     >
       {{ tag | titlecase }}
     </button>
